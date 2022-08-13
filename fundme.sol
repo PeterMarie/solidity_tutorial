@@ -3,8 +3,10 @@
 pragma solidity >=0.6.0 <0.9.0;
 
 import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
+import "@chainlink/contracts/src/v0.6/vendor/SafeMathChainlink.sol";
 
 contract FundMe {
+    using SafeMathChainlink for uint;
 
     mapping(address=>uint) public senderaddresstoamontvalue;
 
@@ -24,8 +26,7 @@ contract FundMe {
     }
 
     function getDecimals() public view returns(uint8){
-      AggregatorV3Interface pricefeed = AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e);
-      return pricefeed.decimals();
+      return AggregatorV3Interface(0x8A753747A1Fa494EC906cE90E9f37563A8AF630e).decimals();
     }
     
     function getEtherPrice(uint weiPrice) public pure returns(uint){
